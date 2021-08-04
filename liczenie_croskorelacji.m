@@ -25,7 +25,7 @@ micnumber = 6;%number of mics
 coorfirstmic = [0 0];
 %%%%%%%%
 
-figure(5)0
+figure(5)
 [bufor, theta1, sampledelay] = make_bufor(micnumber,coorfirstmic,coortrans,d,N,vsound,fs,fc);
 % h = multi_audio_plot(5, bufor');
 
