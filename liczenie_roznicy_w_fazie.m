@@ -18,10 +18,11 @@ nsig = 1;
 lambda = vsound/fc;
 
 d = lambda/2;
+d = 34*1e-2;
 
-coortrans = [2.5 d*3]; %-D_zrodlo_prawa
+coortrans = [2.5 d*3.5]; %-D_zrodlo_prawa
 
-micnumber = 6;%number of mics
+micnumber = 8;%number of mics
 coorfirstmic = [0 0];
 %%%%%%%%
 

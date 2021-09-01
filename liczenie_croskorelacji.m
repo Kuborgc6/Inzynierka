@@ -60,12 +60,12 @@ data = clean_all(data, [0, 10e3], 44100);% konieczne bo mikrofony mają zakres d
 
 %% Liczenie kroskorelacji
 
-Mic1 = 1;
-Mic2 = 8;
+Mic1 = 2;
+Mic2 = 5;
 
 x = data(:,Mic1);
 y = data(:,Mic2);
-[c,lags] = xcorr(x,y);
+[c,lags] = xcorr(x,y,300);
 figure(1)
 stem(lags,c)
 
@@ -91,7 +91,7 @@ for i = 1:N
     for j = 2:micnumber
         x = data(:,Mic1);
         y = data(:,j);
-        [c,lags] = xcorr(x,y);
+        [c,lags] = xcorr(x,y,300);
         [max_cor_mag(i,j), temp] = max(c);
         max_cor_sample(i,j) = 44100 - temp;
         result_c(i,j,:) = c;
@@ -117,7 +117,7 @@ end
 %% Debugging
 
 [data,t] = read(device, seconds(3), "OutputFormat","Matrix");
-data = clean_all(data, [0, 10e3], 44100);% konieczne bo mikrofony mają zakres do 10kHz
+% data = clean_all(data, [0, 10e3], 44100);% konieczne bo mikrofony mają zakres do 10kHz
 
 h10prim = multi_audio_plot(31, data);
 hprim = multi_channel_plotspect(41, data, 44100);
