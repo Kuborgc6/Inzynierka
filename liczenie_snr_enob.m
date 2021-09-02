@@ -45,15 +45,24 @@ device.Channels;
 %% Dane rzeczywiste
 [data,t] = read(device, seconds(1), "OutputFormat","Matrix");
 
-% data = clean_all(data, [0, 10e3], 44100);% konieczne bo mikrofony mają zakres do 10kHz
+data = clean_all(data, [3e2 44100], 44100);% konieczne bo mikrofony mają zakres do 10kHz
 
 h10prim = multi_audio_plot(31, data);
 hprim = multi_channel_plotspect(41, data, 44100);
 
 %% Liczenie SNR i ENOB
 for i = 1:micnumber
-    SNR_channel(i) = snr(data(:,i));
-    ENOB(i) = (10*log10(SNR_channel(i))-1.76)/6.02;
+    SNR_channel_cabel_7000(i) = snr(data_cabel_7000(:,i));
+    ENOB_cabel_7000(i) = (sinad(data_cabel_7000(:,i))-1.76)/6.02;
+    
+    SNR_channel_cabel_wnoise(i) = snr(data_cabel_wnoise(:,i));
+    ENOB_cabel_wnoise(i) = (sinad(data_cabel_wnoise(:,i))-1.76)/6.02;
+    
+    SNR_channel_mic_7000(i) = snr(data_mic_7000(:,i));
+    ENOB_mic_7000(i) = (sinad(data_mic_7000(:,i))-1.76)/6.02;
+    
+    SNR_channel_mic_wnoise(i) = snr(data_mic_wnoise(:,i));
+    ENOB_mic_wnoise(i) = (sinad(data_mic_wnoise(:,i))-1.76)/6.02;
 end
 
 %% Liczenie korelacji między każdym z mikrofonów
@@ -63,4 +72,11 @@ M = 20;
 
 [result_c, max_cor_sample, max_cor_mag] = multi_channel_correlation(data, micnumber, N, h);
 
-[result_c_loop,max_cor_mag_loop, max_cor_sample_loop] = loop_correlation(micnumber, N, h, M, device);
+h10prim = multi_audio_plot(31, data);
+hprim = multi_channel_plotspect(41, data, 44100);
+% 
+x = data(:,1);
+soundsc(x,44100)
+
+
+[result_c_loop,max_cor_mag_loop, max_cor_sample_loop, correlation_channel_1] = loop_correlation(micnumber, N, h, M, device);

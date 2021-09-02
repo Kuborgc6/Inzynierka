@@ -27,7 +27,7 @@ for i = 1:micnumber
         title_str = append("Korelacja między kanałem ",string(i)," i ", string(j));
         temp_c = zeros(1,length(result_c(i,j,:)));
         temp_c(1,:) = result_c(i,j,:);
-        stem(lags,temp_c);
+        stem(lags,abs(temp_c));
         title(title_str);
     end
 end
