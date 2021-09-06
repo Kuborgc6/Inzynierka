@@ -8,7 +8,7 @@ lambda_teor = d_teor*2;
 vsound = 340.3;
 fc_teor = vsound/lambda_teor;
 D_zrodlo = 3;
-fc = 1063;
+fc = 7000;
 
 D_zrodlo_prawa = 0.3;
 

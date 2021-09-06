@@ -1,12 +1,11 @@
 function [difference] = difference_phase(data)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-X=fft(data(:,1));
+X=(fft(data(:,1)));
 [a,b] = size(data);
 difference = zeros(1,b);
-difference(1) = 0;
 for i = 1:b
-    Y=fft(data(:,i));
+    Y=(fft(data(:,i)));
 % Determine the max value and max point.
 % This is where the sinusoidal
 % is located. See Figure 2.
