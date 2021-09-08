@@ -45,7 +45,7 @@ device.Channels;
 %% Dane rzeczywiste
 [data,t] = read(device, seconds(1), "OutputFormat","Matrix");
 
-data = clean_all(data, [3e2 44100], 44100);% konieczne bo mikrofony mają zakres do 10kHz
+data = clean_all(data, [3e2 5e2], 44100);% konieczne bo mikrofony mają zakres do 10kHz
 
 h10prim = multi_audio_plot(31, data);
 hprim = multi_channel_plotspect(41, data, 44100);
@@ -77,6 +77,8 @@ end
 N = 300;
 h = 10;
 M = 20;
+micnumber = 8;%number of mics
+
 
 [result_c, max_cor_sample, max_cor_mag] = multi_channel_correlation(data, micnumber, N, h*10);
 
@@ -89,6 +91,15 @@ soundsc(x,44100)
 
 
 [result_c_loop,max_cor_mag_loop, max_cor_sample_loop, correlation_channel_1] = loop_correlation(micnumber, N, h, M, device);
+
+%% phase difference
+M = 20;
+micnumber = 8;%number of mics
+
+
+[difference_loop] = loop_phase_difference(micnumber, M, device);
+
+
 
 %% debugging phase difference
 
@@ -127,5 +138,7 @@ plot(f,theta_x/pi)
 xlabel 'Frequency (Hz)'
 ylabel 'Phase / \pi'
 grid
-
+%%
+figure(1)
+plot(data(1:1000,:))
 
