@@ -2,14 +2,16 @@ clear;
 close all;
 
 %%
-name_file = "data_tests\data_loop_500Hz.mat";
+fc = 500;% 500 2000 7000
+fc_string = int2str(fc);
+name_file = "data_tests\data_loop_" + fc_string+ "Hz.mat";
 load(name_file);
 
 [a1, a2, a3] = size(data_loop);
 data = zeros(a2,a3);
 
 fs = 44100;
-f_bandpass = [3e2 7e2];
+f_bandpass = [fc-3e2 fc+3e2];
 
 data_loop = clean_data_loop(data_loop, f_bandpass, fs);
 
@@ -43,7 +45,7 @@ fs = 44100;
 M = 20;
 N = 2000;
 micnumber = 8;
-step = 5;
+step = 10;
 
 [bufor_loop] = make_loop_bufor(M,N,fs,fc,micnumber,step);
 bufor = zeros(N,micnumber);
