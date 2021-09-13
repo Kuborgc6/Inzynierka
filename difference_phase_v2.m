@@ -20,10 +20,17 @@ for i = 1:b
     Y(abs(Y) < tol) = 0;
     theta_y = angle(Y(idx));
     
-    phase_lag = theta_y - theta_x;
+    phase_lag = rad2deg(theta_y - theta_x);
 %     phase_lag = mod((theta_y - theta_x),2*pi);
-    difference(i) = rad2deg(phase_lag);
-    
+    if phase_lag > 180
+        difference(i) = phase_lag - 360;
+    elseif phase_lag < - 180
+        difference(i) = 360 + phase_lag;
+    else
+        difference(i) = phase_lag;
+    end
+%     difference(i) = phase_lag;
+
     x2 = hilbert(data(:,i));
     difference_hil(i) = rad2deg(angle(sum(x1.*conj(x2))));
     
