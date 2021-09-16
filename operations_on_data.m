@@ -7,6 +7,7 @@ fc_string = int2str(fc);
 name_file = "data_tests\data_loop_" + fc_string+ "Hz.mat";
 load(name_file);
 
+%%
 [a1, a2, a3] = size(data_loop);
 data = zeros(a2,a3);
 
@@ -27,7 +28,7 @@ h = 100;
 % [result_c_loop,max_cor_mag_loop, max_cor_sample_loop, correlation_channel_1] = loop_correlation(data_loop, N, h);
 [difference_loop, difference_loop_hil] = loop_phase_difference(data_loop);
 
-%%
+% %%
 figure(1)
 data(:,:) = data_loop(4,:,:);
 
@@ -35,8 +36,10 @@ plot(data(1:1000,:))
 
 figure(2)
 plot(difference_loop)
+legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")
 figure(3)
 plot(difference_loop_hil)
+legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")
 
 
 %%
