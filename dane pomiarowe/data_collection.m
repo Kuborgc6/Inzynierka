@@ -19,9 +19,8 @@ ch8 = addinput(device,audio_input,"8","Audio");
 
 device.Channels;
 %%
-d = 4e-2;
-D = 3.6e0;
-fc = 2900;
+d = 1.8e-2;
+D = 2.1e0;
 
 %% data collection
 

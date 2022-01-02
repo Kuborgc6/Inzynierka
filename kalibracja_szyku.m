@@ -7,7 +7,7 @@ load handel;
 
 device = daq('directsound');
 dev = daqlist; % provide list of inputs and outputs in device
-audio_input = "Audio5"; %Audio1
+audio_input = "Audio1"; %Audio1
 ch1 = addinput(device,audio_input,"1","Audio");
 ch2 = addinput(device,audio_input,"2","Audio");
 ch3 = addinput(device,audio_input,"3","Audio");
@@ -20,9 +20,10 @@ ch8 = addinput(device,audio_input,"8","Audio");
 device.Channels;
 
 %% data collection
+close all
 
 time = 1; %seconds of collection 
-M = 40; %how many iteration
+M = 15; %how many iteration
 micnumber = 8;%number of mics
 fs = 44100;
 data_loop = zeros(M, time*fs, micnumber);
@@ -64,8 +65,20 @@ plot(data(1:1000,:))
 legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")
 
 figure(2)
-plot(difference_loop)
-legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")
+plot(difference_loop(:,1:8))
+legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")%)%
+ylim([-180 180])
+
 figure(3)
-plot(difference_loop_hil)
-legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")
+plot(difference_loop_hil(:,1:8))
+legend("Channel 1","Channel 2","Channel 3","Channel 4","Channel 5","Channel 6","Channel 7","Channel 8")%)%
+ylim([-180 180])
+
+%%
+standard_devation = zeros(1,micnumber);
+for i = 1:micnumber
+    standard_devation(i) = std(difference_loop(:,i));
+end
+
+
+

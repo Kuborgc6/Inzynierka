@@ -3,20 +3,13 @@ close all;
 
 %% Załadowanie danych
 
-load('2900_test_00_10_clean.mat')
-% load('2900_test_00_11_clean.mat')
-% load('2900_test_00_12_clean.mat')
-% load('2900_test_40_0_clean.mat')
-% load('2900_test_40_1_clean.mat')
-% load('2900_phase_correction.mat')
-load('2900_phase_correction_11.mat')
-%% Przesunięcie sygnałów
+% load('9452_test_00_after.mat')
+% load('9452_test_30_after.mat')
 
-[data_result_loop] = loop_phase_shift(data_loop,difference_median_hil);
+% load('9452_test_00_after_2.mat')
+load('9452_test_30_after_2.mat')
 
-%% Informacje
-
-fc = 2900; %500 2000 7000
+fc = 9452; %500 2000 7000
 fs = 44100;
 f_bandpass = [fc-3e2 fc+3e2];
 
@@ -42,8 +35,7 @@ ylim([-180 180])
 %% Liczenie Music
 
 number = 100;
-data(:,:) = data_result_loop(20,:,1:6);
-% data(:,:) = data_result_loop(32,:,:);
+data(:,:) = data_result_loop(13,:,:);
 nsig = 1;
 d = 1.8e-2;
 vsound = 340.3;
